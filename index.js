@@ -1,6 +1,21 @@
+function createLoginTracker(userInfo) {
+  let attemptCount = 0;
 
+  const login = (passwordAttempt) => {
+    attemptCount++;
 
+    if (attemptCount > 3) {
+      return "Account locked due to too many failed login attempts";
+    }
 
-module.exports = {
-  ...(typeof createLoginTracker !== 'undefined' && { createLoginTracker })
-};
+    if (passwordAttempt === userInfo.password) {
+      return "Login successful";
+    }
+
+    return `Login attempt ${attemptCount}: Login failed`;
+  };
+
+  return login;
+}
+
+     
